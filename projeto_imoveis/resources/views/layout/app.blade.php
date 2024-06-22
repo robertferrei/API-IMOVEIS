@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,6 +8,13 @@
     <title>Imoveis </title>
 </head>
 <body>
+
+    <style>
+        /* Estilos adicionais para centralizar o formulário */        
+        button{
+            width: 100%;
+        }
+    </style>
     @yield('content')    
 </body>
 </html>

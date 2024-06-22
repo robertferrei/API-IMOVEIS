@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ImoveisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('imoveis')->group(function(){
+    Route::get('/',[ImoveisController::class,'index'])->name('imoveis-index');
+
+});
+Route::fallback(function(){
+    return 'url nao encontrada verifique!';
 });
