@@ -12,5 +12,11 @@ class ImoveisController extends Controller
         return view('index',['imoveis'=> $imoveis]);
         dd($imoveis);
     }
+    public function store(Request $request){
+        Imoveis::create($request->all());
+        //dd("teste");
+        //return redirect()->route('imoveis-index');
+        return view('index');
+    }
     
 }
