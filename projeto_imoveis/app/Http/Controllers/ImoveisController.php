@@ -14,11 +14,32 @@ class ImoveisController extends Controller
         return view('index',['imoveis'=> $imoveis]);
         dd($imoveis);
     }
+    //criação
     public function store(Request $request){
-         Imoveis::create($request->all());                
-         $imoveis  =Imoveis::all();        
+        $messages = [
+            'cpf.required' => 'O campo CPF é obrigatório.',
+            'cpf.digits' => 'O CPF deve ter exatamente 11 dígitos.',
+            'creci.required' => 'O campo CRECI é obrigatório.',
+            'creci.min' => 'O CRECI deve ter no mínimo 3 caracteres.',
+            'nome.required' => 'O campo Nome é obrigatório.',
+            'nome.min' => 'O Nome deve ter no mínimo 3 caracteres.',
+        ];
+
+
+        $validated = $request->validate([
+            'cpf' => ['required', 'digits:11'], // CPF com exatamente 11 dígitos
+            'creci' => ['required', 'min:3'], // CRECI com no mínimo 3 caracteres
+            'nome' => 'required|min:3' // Nome com no mínimo 3 caracteres
+        ],$messages);
+        
+        Imoveis::create($validated);
+        $imoveis = Imoveis::all();
+
+        session()->flash('success', 'Imóvel cadastrado com sucesso!');                
          return view('index', ['imoveis' => $imoveis]);
+         
     }
+    //edição
     public function edit($id){
         $imoveis = Imoveis::where('id',$id)->first();
         if(!empty($imoveis)){
@@ -30,16 +51,17 @@ class ImoveisController extends Controller
         }
     }
     public function update(Request $request, $id){
-        $data=[
-            'nome'=>$request->nome,
-            'creci'=>$request->creci,
-            'cpf'=>$request -> cpf
-        ];
+      $data = $request->validate([
+        'nome' => 'required|min:3',
+        'creci' => 'required|min:3',
+        'cpf' => 'required|digits:11',
+    ]);
 
-        Imoveis::where('id',$id)->update($data);
-        return redirect()->route('imoveis-index');
-
+    Imoveis::where('id', $id)->update($data);
+    return redirect()->route('imoveis-index')->with('success', 'Imóvel atualizado com sucesso!');
     }
+    
+    //delete
     public function destroy($id){
         Imoveis::where('id', $id)->delete();
         return redirect()->route('imoveis-index');
