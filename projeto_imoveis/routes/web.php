@@ -17,14 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('corretor')->group(function(){
-    Route::get('/',[ImoveisController::class,'index'])->name('imoveis-index');
-    Route::post('/',[ImoveisController::class,'store'])->name('imoveis-store');
+Route::prefix('corretor')->group(function () {
+    Route::get('/', [ImoveisController::class, 'index'])->name('imoveis-index');
+    Route::post('/', [ImoveisController::class, 'store'])->name('imoveis-store');
 
-    Route::get('/{id}/edit',[ImoveisController::class,'edit'])-> where('id','[0-9]+')->name('imoveis-edit');
-    Route::put('/{id}',[ImoveisController::class,'update'])-> where('id','[0-9]+')->name('imoveis-update');
-    Route::delete('/{id}',[ImoveisController::class,'destroy'])-> where('id','[0-9]+')->name('imoveis-destroy');
+    Route::get('/{id}/edit', [ImoveisController::class, 'edit'])->where('id', '[0-9]+')->name('imoveis-edit');
+    Route::put('/{id}', [ImoveisController::class, 'update'])->where('id', '[0-9]+')->name('imoveis-update');
+    Route::delete('/{id}', [ImoveisController::class, 'destroy'])->where('id', '[0-9]+')->name('imoveis-destroy');
 });
-Route::fallback(function(){
+Route::fallback(function () {
     return 'url nao encontrada verifique!';
 });

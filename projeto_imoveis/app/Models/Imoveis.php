@@ -9,7 +9,7 @@ class Imoveis extends Model
 {
     use HasFactory;
     //definindo colunas 
-    protected $fillable =[
+    protected $fillable = [
         'nome',
         'cpf',
         'creci'
