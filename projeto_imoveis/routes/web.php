@@ -20,22 +20,11 @@ Route::get('/', function () {
 Route::prefix('imoveis')->group(function(){
     Route::get('/',[ImoveisController::class,'index'])->name('imoveis-index');
     Route::post('/',[ImoveisController::class,'store'])->name('imoveis-store');
-    
+
     Route::get('/{id}/edit',[ImoveisController::class,'edit'])-> where('id','[0-9]+')->name('imoveis-edit');
     Route::put('/{id}',[ImoveisController::class,'update'])-> where('id','[0-9]+')->name('imoveis-update');
-    //Route::delete('/{id}',[LivrosControler::class,'destroy'])-> where('id','[0-9]+')->name('livros-destroy');
+    Route::delete('/{id}',[ImoveisController::class,'destroy'])-> where('id','[0-9]+')->name('imoveis-destroy');
 });
-
-
-
-// Route::prefix('livros')->group(function(){
-//     Route::get('/',[LivrosControler::class,'index'])->name('livros-index');
-//     Route::get('/create',[LivrosControler::class,'create'])->name('livros-create');    
-//     Route::post('/',[LivrosControler::class,'store'])->name('livros-store');
-//     Route::get('/{id}/edit',[LivrosControler::class,'edit'])-> where('id','[0-9]+')->name('livros-edit');
-//     Route::put('/{id}',[LivrosControler::class,'update'])-> where('id','[0-9]+')->name('livros-update');
-//     Route::delete('/{id}',[LivrosControler::class,'destroy'])-> where('id','[0-9]+')->name('livros-destroy');
-//  });
 Route::fallback(function(){
     return 'url nao encontrada verifique!';
 });

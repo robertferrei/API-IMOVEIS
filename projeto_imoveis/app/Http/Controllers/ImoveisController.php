@@ -38,7 +38,11 @@ class ImoveisController extends Controller
 
         Imoveis::where('id',$id)->update($data);
         return redirect()->route('imoveis-index');
-        
+
+    }
+    public function destroy($id){
+        Imoveis::where('id', $id)->delete();
+        return redirect()->route('imoveis-index');
     }
 
     
