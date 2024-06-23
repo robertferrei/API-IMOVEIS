@@ -35,7 +35,7 @@ class ImoveisController extends Controller
         Imoveis::create($validated);
         $imoveis = Imoveis::all();
 
-        session()->flash('success', 'Imóvel cadastrado com sucesso!');                
+        session()->flash('success', 'Corretor cadastrado com sucesso!');                
          return view('index', ['imoveis' => $imoveis]);
          
     }
@@ -58,7 +58,7 @@ class ImoveisController extends Controller
     ]);
 
     Imoveis::where('id', $id)->update($data);
-    return redirect()->route('imoveis-index')->with('success', 'Imóvel atualizado com sucesso!');
+    return redirect()->route('imoveis-index')->with('success', 'Corretor atualizado com sucesso!');
     }
     
     //delete

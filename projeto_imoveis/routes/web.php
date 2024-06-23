@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('imoveis')->group(function(){
+Route::prefix('corretor')->group(function(){
     Route::get('/',[ImoveisController::class,'index'])->name('imoveis-index');
     Route::post('/',[ImoveisController::class,'store'])->name('imoveis-store');
 
