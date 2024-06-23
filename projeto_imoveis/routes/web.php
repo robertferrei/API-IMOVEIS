@@ -20,7 +20,10 @@ Route::get('/', function () {
 Route::prefix('imoveis')->group(function(){
     Route::get('/',[ImoveisController::class,'index'])->name('imoveis-index');
     Route::post('/',[ImoveisController::class,'store'])->name('imoveis-store');
-
+    
+    Route::get('/{id}/edit',[ImoveisController::class,'edit'])-> where('id','[0-9]+')->name('imoveis-edit');
+    Route::put('/{id}',[ImoveisController::class,'update'])-> where('id','[0-9]+')->name('imoveis-update');
+    //Route::delete('/{id}',[LivrosControler::class,'destroy'])-> where('id','[0-9]+')->name('livros-destroy');
 });
 
 
